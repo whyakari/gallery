@@ -100,7 +100,7 @@ dependencies {
     val material3_version = "1.3.0-alpha01"
     val compose_version = "2024.04.00"
     val lifecycle_version = "2.7.0"
-    val room_version = "2.6.1"
+    val room_version = "2.8.5"
     val hilt_version = "2.60.1"
     val coil_version = "2.7.0"
     val serialization_version = "1.13.0"
