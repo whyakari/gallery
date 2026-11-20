@@ -59,6 +59,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavController
 import androidx.navigation.compose.NavHost
@@ -436,6 +437,3 @@ private fun toggleSelection(id: Long, selectedItems: kotlinx.coroutines.sync.Mut
         selectedItems.add(id)
     }
 }
-
-// Missing import for detectTapGestures
-import androidx.compose.foundation.gestures.detectTapGestures
