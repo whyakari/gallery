@@ -130,12 +130,12 @@ dependencies {
     implementation("androidx.compose.runtime:runtime-livedata")
     implementation("androidx.compose.runtime:runtime-rxjava3")
     implementation("androidx.activity:activity-compose:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.7.0")
+    implementation("androidx.appcompat:appcompat:1.8.0")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycle_version")
 
     // Navigation
-    implementation("androidx.navigation:navigation-compose:2.7.6")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
+    implementation("androidx.navigation:navigation-compose:2.10.2")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.10.2")
 
     // Hilt DI
     implementation("com.google.dagger:hilt-android:$hilt_version")
@@ -149,7 +149,7 @@ dependencies {
     ksp("androidx.room:room-compiler:$room_version")
 
     // DataStore Preferences
-    implementation("androidx.datastore:datastore-preferences:1.1.1")
+    implementation("androidx.datastore:datastore-preferences:1.3.0")
 
     // Coil Image Loading (optimized for Go)
     implementation("io.coil-kt:coil-compose:$coil_version")
@@ -193,14 +193,14 @@ dependencies {
     // implementation("com.google.android.exoplayer:exoplayer-hls:2.20.0")
 
     // WorkManager for background tasks
-    implementation("androidx.work:work-runtime-ktx:2.9.0")
+    implementation("androidx.work:work-runtime-ktx:2.12.0")
 
     // Paging 3
     implementation("androidx.paging:paging-compose:3.2.1")
     implementation("androidx.paging:paging-runtime-ktx:3.2.1")
 
     // Biometric Auth (for locked folder)
-    implementation("androidx.biometric:biometric-ktx:1.2.0-alpha03")
+    implementation("androidx.biometric:biometric-ktx:1.4.0-alpha02")
 
     // Testing
     testImplementation("junit:junit:4.13.2")
