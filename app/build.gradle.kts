@@ -104,7 +104,7 @@ dependencies {
     val hilt_version = "2.50"
     val coil_version = "2.4.0"
     val serialization_version = "1.6.3"
-    val accompanist_version = "0.32.0"
+    val accompanist_version = "0.36.0"
     val okhttp_version = "4.12.0"
     val coroutines_version = "1.7.3"
     val gson_version = "2.10.1"
