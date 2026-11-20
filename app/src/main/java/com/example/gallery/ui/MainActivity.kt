@@ -1,12 +1,15 @@
 package com.example.gallery.ui
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.BottomNavigation
 import androidx.compose.material3.BottomNavigationItem
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -35,10 +38,14 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.compose.navArgument
 import com.example.gallery.ui.home.HomeScreen
-import com.example.gallery.ui.home.HomeTab
 import com.example.gallery.ui.search.SearchScreen
 import com.example.gallery.ui.theme.ExpressiveGalleryTheme
+import com.google.accompanist.permissions.rememberPermissionRequired
+import com.google.accompanist.permissions.rememberPermissionState
+import com.google.accompanist.permissions.PermissionRequiredReason
+import com.google.accompanist.permissions.PermissionRequiredRationaleDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -52,7 +59,114 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.surface
                 ) {
-                    MainNavHost()
+                    PermissionGate {
+                        MainNavHost()
+                    }
+                }
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun PermissionGate(content: @Composable () -> Unit) {
+    // Permissions needed for MediaStore access on Android 13+
+    val mediaPermissions = remember {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            listOf(
+                android.Manifest.permission.READ_MEDIA_IMAGES,
+                android.Manifest.permission.READ_MEDIA_VIDEO,
+            )
+        } else {
+            listOf(
+                android.Manifest.permission.READ_EXTERNAL_STORAGE,
+            )
+        }
+    }
+
+    val allGranted = mediaPermissions.all { permission ->
+        val state = rememberPermissionState(permission)
+        state.status.isGranted
+    }
+
+    // Request permissions if not all granted
+    val permissionStates = mediaPermissions.map { permission ->
+        rememberPermissionState(permission)
+    }
+
+    val shouldShowRationale = permissionStates.any { it.status.shouldShowRationale }
+    val isPermanentlyDenied = permissionStates.any { it.status.isPermanentlyDenied }
+
+    LaunchedEffect(Unit) {
+        if (!allGranted && !shouldShowRationale && !isPermanentlyDenied) {
+            permissionStates.forEach { it.launchPermissionRequest() }
+        }
+    }
+
+    if (allGranted) {
+        content()
+    } else {
+        PermissionScreen(
+            onRequestPermissions = { permissionStates.forEach { it.launchPermissionRequest() } },
+            onOpenSettings = { /* TODO: open app settings */ },
+            shouldShowRationale = shouldShowRationale,
+            isPermanentlyDenied = isPermanentlyDenied,
+        )
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun PermissionScreen(
+    onRequestPermissions: () -> Unit,
+    onOpenSettings: () -> Unit,
+    shouldShowRationale: Boolean,
+    isPermanentlyDenied: Boolean,
+) {
+    val rationaleState = remember { mutableStateOf(shouldShowRationale) }
+    val permanentlyDeniedState = remember { mutableStateOf(isPermanentlyDenied) }
+
+    if (rationaleState.value) {
+        PermissionRequiredRationaleDialog(
+            onDismissRequest = { rationaleState.value = false },
+            title = { Text("Permissão necessária") },
+            message = { Text("O app precisa acessar suas fotos e vídeos para mostrar a galeria.") },
+            negativeButton = { Text("Cancelar") },
+            positiveButton = {
+                Text("Permitir")
+                onClick = { onRequestPermissions() }
+            },
+        )
+    } else if (permanentlyDeniedState.value) {
+        androidx.compose.material3.AlertDialog(
+            onDismissRequest = { permanentlyDeniedState.value = false },
+            title = { Text("Permissão negada permanentemente") },
+            text = { Text("Vá nas configurações do app e ative 'Fotos e vídeos'.") },
+            confirmButton = {
+                Text("Abrir configurações")
+                onClick = { onOpenSettings() }
+            },
+            dismissButton = {
+                Text("Mais tarde")
+                onClick = { permanentlyDeniedState.value = false }
+            },
+        )
+    } else {
+        androidx.compose.material3.Scaffold(
+            topBar = { androidx.compose.material3.TopAppBar(title = { Text("Galeria Expressive") }) }
+        ) { padding ->
+            Box(modifier = Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Icon(Icons.Default.PhotoLibrary, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(80.dp))
+                    androidx.compose.foundation.layout.Spacer(modifier = androidx.compose.foundation.layout.height(24.dp))
+                    Text(text = "Acesso à mídia necessário", fontSize = 20.sp, fontWeight = androidx.compose.ui.text.font.FontWeight.Bold)
+                    androidx.compose.foundation.layout.Spacer(modifier = androidx.compose.foundation.layout.height(12.dp))
+                    Text(text = "Para ver suas fotos e vídeos, precisamos da sua permissão.", textAlign = androidx.compose.ui.text.style.TextAlign.Center, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(horizontal = 32.dp))
+                    androidx.compose.foundation.layout.Spacer(modifier = androidx.compose.foundation.layout.height(24.dp))
+                    Button(onClick = onRequestPermissions, modifier = Modifier.padding(horizontal = 32.dp).fillMaxWidth()) {
+                        Text("Conceder permissão")
+                    }
                 }
             }
         }
