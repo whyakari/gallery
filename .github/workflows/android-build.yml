@@ -19,17 +19,17 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v6
         with:
           distribution: 'temurin'
           java-version: ${{ env.JAVA_VERSION }}
           cache: 'gradle'
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
         with:
           api-level: 34
           ndk-version: '26.1.10909125'
@@ -44,7 +44,7 @@ jobs:
 
       - name: Upload Lint Report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: lint-report
           path: app/build/reports/lint-results-debug.html
@@ -57,17 +57,17 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v6
         with:
           distribution: 'temurin'
           java-version: ${{ env.JAVA_VERSION }}
           cache: 'gradle'
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
         with:
           api-level: 34
           ndk-version: '26.1.10909125'
@@ -80,7 +80,7 @@ jobs:
 
       - name: Upload Test Reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: unit-test-reports
           path: app/build/reports/tests/testDebugUnitTest/
@@ -94,17 +94,17 @@ jobs:
     needs: [lint, unit-tests]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v6
         with:
           distribution: 'temurin'
           java-version: ${{ env.JAVA_VERSION }}
           cache: 'gradle'
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
         with:
           api-level: 34
           ndk-version: '26.1.10909125'
@@ -118,7 +118,7 @@ jobs:
         run: ./gradlew assembleDebug --no-daemon --stacktrace
 
       - name: Upload Debug APKs
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: debug-apks
           path: |
@@ -126,7 +126,7 @@ jobs:
           retention-days: 30
 
       - name: Upload Mapping File (for ProGuard/R8)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: debug-mapping
           path: app/build/outputs/mapping/debug/mapping.txt
@@ -140,17 +140,17 @@ jobs:
     needs: [lint, unit-tests]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v6
         with:
           distribution: 'temurin'
           java-version: ${{ env.JAVA_VERSION }}
           cache: 'gradle'
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
         with:
           api-level: 34
           ndk-version: '26.1.10909125'
@@ -167,7 +167,7 @@ jobs:
         run: ./gradlew bundleRelease --no-daemon --stacktrace
 
       - name: Upload Release APKs
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: release-apks
           path: |
@@ -175,14 +175,14 @@ jobs:
           retention-days: 90
 
       - name: Upload Release Bundle (AAB)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: release-bundle
           path: app/build/outputs/bundle/release/*.aab
           retention-days: 90
 
       - name: Upload Release Mapping File
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: release-mapping
           path: app/build/outputs/mapping/release/mapping.txt
@@ -196,17 +196,17 @@ jobs:
     needs: [build-debug]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v6
         with:
           distribution: 'temurin'
           java-version: ${{ env.JAVA_VERSION }}
           cache: 'gradle'
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
         with:
           api-level: 34
           ndk-version: '26.1.10909125'
@@ -235,7 +235,7 @@ jobs:
 
       - name: Upload Instrumented Test Reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: instrumented-test-reports
           path: app/build/reports/androidTests/connected/
@@ -248,10 +248,10 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v6
         with:
           distribution: 'temurin'
           java-version: ${{ env.JAVA_VERSION }}
@@ -269,7 +269,7 @@ jobs:
 
       - name: Upload Dependency Check Report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: dependency-check-report
           path: dependency-check-report/
@@ -293,7 +293,7 @@ jobs:
           merge-multiple: true
 
       - name: Create Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: |
             artifacts/release-apks/*.apk
