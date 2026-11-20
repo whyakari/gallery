@@ -2,6 +2,7 @@ package com.example.gallery.ui.theme
 
 import android.app.Activity
 import android.content.Context
+import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -23,8 +24,8 @@ fun ExpressiveGalleryTheme(
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-        dynamicColor && darkTheme -> dynamicDarkColorScheme(LocalContext.current)
-        dynamicColor && !darkTheme -> dynamicLightColorScheme(LocalContext.current)
+        dynamicColor && darkTheme && isDynamicColorAvailable() -> dynamicDarkColorScheme(LocalContext.current)
+        dynamicColor && !darkTheme && isDynamicColorAvailable() -> dynamicLightColorScheme(LocalContext.current)
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
@@ -190,4 +191,13 @@ private fun findActivity(context: Context): Activity? {
         currentContext = currentContext.baseContext
     }
     return if (currentContext is Activity) currentContext else null
+}
+
+/**
+ * Verifica se dynamic color (Material You) está disponível.
+ * Requer Android 12 (API 31) ou superior.
+ */
+@Composable
+private fun isDynamicColorAvailable(): Boolean {
+    return Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
 }
