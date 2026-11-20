@@ -1,0 +1,92 @@
+version: 2
+updates:
+  # Gradle dependencies (Kotlin DSL)
+  - package-ecosystem: "gradle"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "UTC"
+    labels:
+      - "dependencies"
+      - "gradle"
+    commit-message:
+      prefix: "chore(deps):"
+    groups:
+      android-libraries:
+        patterns:
+          - "androidx.*"
+          - "com.google.android.*"
+        update-types:
+          - "minor"
+          - "patch"
+      compose-libraries:
+        patterns:
+          - "androidx.compose.*"
+        update-types:
+          - "minor"
+          - "patch"
+      hilt:
+        patterns:
+          - "com.google.dagger:hilt*"
+          - "androidx.hilt:*"
+        update-types:
+          - "minor"
+          - "patch"
+      room:
+        patterns:
+          - "androidx.room:*"
+        update-types:
+          - "minor"
+          - "patch"
+      coil:
+        patterns:
+          - "io.coil-kt:*"
+        update-types:
+          - "minor"
+          - "patch"
+      kotlin:
+        patterns:
+          - "org.jetbrains.kotlin*"
+          - "org.jetbrains.kotlinx:*"
+        update-types:
+          - "minor"
+          - "patch"
+      test-libraries:
+        patterns:
+          - "junit:*"
+          - "org.mockito:*"
+          - "androidx.test*"
+          - "androidx.espresso:*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "07:00"
+      timezone: "UTC"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "chore(ci):"
+
+  # Docker (if using containers)
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "08:00"
+      timezone: "UTC"
+    labels:
+      - "dependencies"
+      - "docker"
+    commit-message:
+      prefix: "chore(docker):"

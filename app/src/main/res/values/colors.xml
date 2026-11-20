@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Material Expressive Color Palette -->
+    <!-- Coral - Primary -->
+    <color name="coral_50">#FFF0ED</color>
+    <color name="coral_100">#FFD6D1</color>
+    <color name="coral_200">#FFADA4</color>
+    <color name="coral_300">#FF8478</color>
+    <color name="coral_400">#FF5B4B</color>
+    <color name="coral_500">#FF321E</color>
+    <color name="coral_600">#E62D1B</color>
+    <color name="coral_700">#CC2818</color>
+    <color name="coral_800">#B32315</color>
+    <color name="coral_900">#991E12</color>
+    <color name="coral_950">#80190F</color>
+
+    <!-- Teal - Secondary -->
+    <color name="teal_50">#E6FFFA</color>
+    <color name="teal_100">#B2F5EA</color>
+    <color name="teal_200">#81E6D9</color>
+    <color name="teal_300">#4FD6C8</color>
+    <color name="teal_400">#26C9BA</color>
+    <color name="teal_500">#00BB9E</color>
+    <color name="teal_600">#00A88F</color>
+    <color name="teal_700">#009480</color>
+    <color name="teal_800">#008171</color>
+    <color name="teal_900">#006D62</color>
+    <color name="teal_950">#005A53</color>
+
+    <!-- Purple - Tertiary -->
+    <color name="purple_50">#F3E8FF</color>
+    <color name="purple_100">#E9D5FF</color>
+    <color name="purple_200">#D8B4FE</color>
+    <color name="purple_300">#C084FC</color>
+    <color name="purple_400">#A855F7</color>
+    <color name="purple_500">#9333EA</color>
+    <color name="purple_600">#7E22CE</color>
+    <color name="purple_700">#6B21A8</color>
+    <color name="purple_800">#581C87</color>
+    <color name="purple_900">#4C1D95</color>
+    <color name="purple_950">#2E1065</color>
+
+    <!-- Surface Colors -->
+    <color name="surface">#FFFBFE</color>
+    <color name="surface_variant">#F5F0F4</color>
+    <color name="surface_container">#F5F0F4</color>
+    <color name="surface_container_low">#FDF8FC</color>
+    <color name="surface_container_high">#ECE6EC</color>
+    <color name="surface_container_highest">#E2DCE3</color>
+
+    <!-- On Surface Colors -->
+    <color name="on_surface">#1D1B1E</color>
+    <color name="on_surface_variant">#4A444A</color>
+
+    <!-- Outline Colors -->
+    <color name="outline">#7A747A</color>
+    <color name="outline_variant">#CAC4CA</color>
+
+    <!-- Error Colors -->
+    <color name="error">#BA1A1A</color>
+    <color name="error_container">#FFDAD6</color>
+    <color name="on_error">#FFFFFF</color>
+    <color name="on_error_container">#410002</color>
+
+    <!-- Success Colors -->
+    <color name="success">#006D32</color>
+    <color name="success_container">#A7F3C9</color>
+    <color name="on_success">#FFFFFF</color>
+    <color name="on_success_container">#00210A</color>
+
+    <!-- Warning Colors -->
+    <color name="warning">#8C6000</color>
+    <color name="warning_container">#FFE58A</color>
+    <color name="on_warning">#FFFFFF</color>
+    <color name="on_warning_container">#2D1A00</color>
+
+    <!-- Standard Colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+
+    <!-- Shadows -->
+    <color name="shadow_ambient">#000000</color>
+    <color name="shadow_spot">#000000</color>
+    <color name="scrim">#000000</color>
+
+    <!-- Selection -->
+    <color name="selection_handle">#FF321E</color>
+
+    <!-- Links -->
+    <color name="link_text_material">#FF321E</color>
+</resources>

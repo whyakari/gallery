@@ -1,0 +1,28 @@
+<resources>
+    <!-- Base application theme - Use AppCompat for XML, Compose handles Material 3 theming -->
+    <style name="Theme.MaterialExpressiveGallery" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Status bar -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <!-- Window -->
+        <item name="android:windowBackground">@color/surface</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <!-- No ActionBar -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- Search theme -->
+    <style name="Theme.MaterialExpressiveGallery.Search" parent="Theme.MaterialExpressiveGallery">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <!-- Splash theme -->
+    <style name="Theme.MaterialExpressiveGallery.Splash" parent="Theme.MaterialExpressiveGallery">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+</resources>

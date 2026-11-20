@@ -1,0 +1,102 @@
+# Gradle
+.gradle/
+build/
+*/build/
+!src/main/build/
+!src/test/build/
+
+# Local configuration
+local.properties
+*.iml
+.idea/
+*.iws
+*.ipr
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Android
+*.apk
+*.ap_
+*.aab
+*.aar
+*.so
+*.jar
+*.class
+*.dex
+*.o
+*.obj
+
+# Generated
+generated/
+out/
+release/
+
+# Kotlin
+*.kt.metadata
+
+# Room
+schemas/
+
+# CMake
+.cxx/
+.cmake/
+CMakeFiles/
+cmake_install.cmake
+CMakeCache.txt
+Makefile
+*.ninja
+build.ninja
+
+# Native
+*.so
+*.dylib
+*.dll
+
+# Logs
+*.log
+
+# Cache
+.cache/
+.kotlin/
+.ksp/
+
+# Android Studio
+*.hprof
+captures/
+
+# Test
+test-results/
+
+# Coverage
+coverage/
+*.ec
+*.exec
+
+# ProGuard
+proguard/
+mapping.txt
+
+# Release
+*.keystore
+*.jks
+keystore.properties
+
+# ML Models
+*.tflite
+*.bin
+*.model
+ml_models/
+
+# Node
+node_modules/
+package-lock.json
+yarn.lock
+
+# Misc
+*.orig
+*.patch
+.terraform/
+*.tfstate
+*.tfstate.backup
