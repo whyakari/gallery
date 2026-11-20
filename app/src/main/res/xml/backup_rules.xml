@@ -2,6 +2,7 @@
 <full-backup-content>
     <include domain="database" path="gallery.db" />
     <include domain="sharedpref" path="." />
+    <include domain="file" path="." />
     <exclude domain="file" path="cache/*" />
     <exclude domain="file" path="thumbnails/*" />
     <exclude domain="file" path="ml_models/*" />
