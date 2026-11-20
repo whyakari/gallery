@@ -1,0 +1,7 @@
+<resources>
+    <!-- API 27+ (Android 8.1+) overrides -->
+    <style name="Theme.MaterialExpressiveGallery" parent="Theme.MaterialExpressiveGallery.Base">
+        <!-- Navigation bar light/dark icons - API 27+ -->
+        <item name="android:windowLightNavigationBar">false</item>
+    </style>
+</resources>
