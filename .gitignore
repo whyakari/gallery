@@ -23,6 +23,7 @@ Thumbs.db
 *.aar
 *.so
 *.jar
+!gradle/wrapper/gradle-wrapper.jar
 *.class
 *.dex
 *.o
