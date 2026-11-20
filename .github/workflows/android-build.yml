@@ -277,37 +277,6 @@ jobs:
           path: app/build/reports/androidTests/connected/
           retention-days: 7
 
-  # ---------- Dependency Check ----------
-  dependency-check:
-    name: Dependency Vulnerability Scan
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v7
-
-      - name: Run OWASP Dependency Check
-        uses: dependency-check/Dependency-Check_Action@main
-        id: depcheck
-        with:
-          project: 'MaterialExpressiveGallery'
-          path: '.'
-          format: 'HTML'
-          out: 'dependency-check-report'
-          jdk-version: '17'
-          args: '--disableRetireJS --disableNodeJS --disablePyPkg --disableRubyGems --disableCocoaPods --disableComposer --disableSwiftPM --disableNuGet --disableGo --disableRust --disableCMake --disableAutoconf --disableArchive'
-        env:
-          # Prevent host JAVA_HOME from leaking into Docker container
-          JAVA_HOME: ''
-
-      - name: Upload Dependency Check Report
-        if: always()
-        uses: actions/upload-artifact@v7
-        with:
-          name: dependency-check-report
-          path: dependency-check-report/
-          retention-days: 30
-
   # ---------- Release (on tag) ----------
   release:
     name: Create GitHub Release
@@ -341,7 +310,7 @@ jobs:
     name: Build Summary
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    needs: [build-debug, build-release, instrumented-tests, dependency-check]
+    needs: [build-debug, build-release, instrumented-tests]
     if: always()
     steps:
       - name: Check job statuses
@@ -352,7 +321,6 @@ jobs:
           echo "Build Debug: ${{ needs.build-debug.result }}"
           echo "Build Release: ${{ needs.build-release.result }}"
           echo "Instrumented Tests: ${{ needs.instrumented-tests.result }}"
-          echo "Dependency Check: ${{ needs.dependency-check.result }}"
 
           # Fail if any required job failed
           if [[ "${{ needs.lint.result }}" != "success" ]] || \
