@@ -103,10 +103,10 @@ dependencies {
     val room_version = "2.6.1"
     val hilt_version = "2.60.1"
     val coil_version = "2.7.0"
-    val serialization_version = "1.6.3"
+    val serialization_version = "1.13.0"
     val accompanist_version = "0.32.0"
     val okhttp_version = "4.12.0"
-    val coroutines_version = "1.7.3"
+    val coroutines_version = "1.11.0"
     val gson_version = "2.10.1"
 
     // Compose BOM
@@ -160,7 +160,7 @@ dependencies {
     // Coroutines & Flow (Flow is included in kotlinx-coroutines-core)
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version")
     // Kotlinx DateTime
-    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.8.0")
 
     // Serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serialization_version")
