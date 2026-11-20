@@ -286,20 +286,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v6
-        with:
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          java-version: ${{ env.JAVA_VERSION }}
-          cache: 'gradle'
-
-      - name: Verify Java setup
-        run: |
-          echo "JAVA_HOME=$JAVA_HOME"
-          java -version
-          which java
-          ls -la "$JAVA_HOME/bin/java"
-
       - name: Run OWASP Dependency Check
         uses: dependency-check/Dependency-Check_Action@main
         id: depcheck
@@ -308,7 +294,11 @@ jobs:
           path: '.'
           format: 'HTML'
           out: 'dependency-check-report'
+          jdk-version: '17'
           args: '--disableRetireJS --disableNodeJS --disablePyPkg --disableRubyGems --disableCocoaPods --disableComposer --disableSwiftPM --disableNuGet --disableGo --disableRust --disableCMake --disableAutoconf --disableArchive'
+        env:
+          # Prevent host JAVA_HOME from leaking into Docker container
+          JAVA_HOME: ''
 
       - name: Upload Dependency Check Report
         if: always()
