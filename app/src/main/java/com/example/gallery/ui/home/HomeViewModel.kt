@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import androidx.paging.flow.cachedIn
 import com.example.gallery.data.repository.MediaRepository
 import com.example.gallery.domain.model.MediaItem
@@ -13,6 +14,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -66,17 +68,17 @@ class MediaPagingSource(
         val offset = (page - 1) * limit
 
         return try {
-            val items = when (type) {
-                Type.ALL_IMAGES -> mediaRepository.getMediaItemsPaged(limit, offset)
-                Type.FAVORITES -> mediaRepository.getFavoriteMediaItems().take(1).single()
+            val items: List<MediaItem> = when (type) {
+                Type.ALL_IMAGES -> mediaRepository.getMediaItemsPaged(limit, offset).first()
+                Type.FAVORITES -> mediaRepository.getFavoriteMediaItems().first()
                     .drop(offset).take(limit)
-                Type.VIDEOS -> mediaRepository.getVideoMediaItems().take(1).single()
+                Type.VIDEOS -> mediaRepository.getVideoMediaItems().first()
                     .drop(offset).take(limit)
                 Type.SCREENSHOTS -> mediaRepository.getMediaItemsByLabel("screenshot")
-                    .take(1).single().drop(offset).take(limit)
+                    .first().drop(offset).take(limit)
                 Type.DOCUMENTS -> mediaRepository.getMediaItemsByLabel("document")
-                    .take(1).single().drop(offset).take(limit)
-                Type.FOLDERS -> mediaRepository.getMediaItemsPaged(limit, offset) // TODO: bucket grouping
+                    .first().drop(offset).take(limit)
+                Type.FOLDERS -> mediaRepository.getMediaItemsPaged(limit, offset).first()
             }
 
             LoadResult.Page(
