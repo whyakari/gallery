@@ -41,7 +41,7 @@ jobs:
         run: ./gradlew assembleDebug --no-daemon --stacktrace -x lint -x test
 
       - name: Upload Debug APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: pr-debug-apk
           path: app/build/outputs/apk/debug/*.apk
