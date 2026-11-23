@@ -103,7 +103,7 @@ dependencies {
     val lifecycle_version = "2.7.0"
     val room_version = "2.6.1"
     val hilt_version = "2.50"
-    val coil_version = "2.4.0"
+    val coil_version = "2.7.0"
     val serialization_version = "1.6.3"
     val accompanist_version = "0.32.0"
     val okhttp_version = "4.12.0"
