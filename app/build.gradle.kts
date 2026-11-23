@@ -98,7 +98,7 @@ android {
 dependencies {
     // Core Android & Material Expressive (Material 3 + Expressive)
     // Versions pinned for AGP 8.4.0 + compileSdk 34 compatibility
-    val material3_version = "1.3.0-alpha01"
+    val material3_version = "1.6.0-alpha01"
     val compose_version = "2024.04.00"
     val lifecycle_version = "2.7.0"
     val room_version = "2.6.1"
