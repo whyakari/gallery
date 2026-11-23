@@ -102,7 +102,7 @@ dependencies {
     val compose_version = "2024.04.00"
     val lifecycle_version = "2.7.0"
     val room_version = "2.6.1"
-    val hilt_version = "2.50"
+    val hilt_version = "2.60.1"
     val coil_version = "2.4.0"
     val serialization_version = "1.6.3"
     val accompanist_version = "0.32.0"
@@ -142,7 +142,7 @@ dependencies {
     // Hilt DI
     implementation("com.google.dagger:hilt-android:$hilt_version")
     ksp("com.google.dagger:hilt-compiler:$hilt_version")
-    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.4.0")
 
     // Room Database
     implementation("androidx.room:room-runtime:$room_version")
